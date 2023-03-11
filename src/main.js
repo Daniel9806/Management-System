@@ -4,4 +4,6 @@ import App from './App.vue'
 import { createPinia } from 'pinia'
 import router from './router'
 
+import './assets/animate.css'
+
 createApp(App).use(createPinia()).use(router).mount('#app')
