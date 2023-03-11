@@ -32,14 +32,14 @@
 
 <script>
 export default {
-  name: "ModalGeneric",
+  name: "ModalUser",
 
   emits: ["closeModal"],
 
   props: {
     title: {
       type: String,
-      default: "Perfil de Usuario",
+      default: "User Profile",
     },
     maxWidth: {
       type: String,
