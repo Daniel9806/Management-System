@@ -5,17 +5,25 @@
       <div class="flex items-center space-x-2 mr-4 cursor-pointer">
         <DarkMode />
         <img class="w-8 h-8 rounded-full" src="../../assets/vue.svg" alt="">
-        <p v-if="authStore.getUserAuth">{{ authStore.getUserAuth.username }}</p>
+        <p @click="modalUserActive = true" 
+        v-if="authStore.getUserAuth">{{ authStore.getUserAuth.username }}</p>
       </div>
     </div>
   </div>
+
+  <ModalUser v-if="modalUserActive" @closeModal="modalUserActive = false" 
+  :title="'User Settings'"/>
 </template>
 
 <script setup>
 import DarkMode from '../DarkMode.vue'
+import ModalUser from '../tools/ModalUserProfile.vue'
 import { useAuthStore } from '../../store/authStore';
+import { ref } from 'vue'
 
 const authStore = useAuthStore()
+
+const modalUserActive = ref(false)
 
 </script>
 
