@@ -15,5 +15,4 @@ const increment = (value) => {
     counterStore.incrementBy(value)
 }
 
-
 </script>
