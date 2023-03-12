@@ -5,7 +5,7 @@
           <div class="flex items-center bg-main-color h-9 justify-between rounded-t">
           <p class="ml-2 font-medium text-lg text-black">{{ title }}</p>
 
-          <i @click="clickOn" class="material-icons px-3 py-1 cursor-pointer text-black
+          <i @click="clickOn" class="material-icons p-1 cursor-pointer text-black
                hover:bg-gray-400 hover:bg-opacity-30 rounded-full">close</i>
 
         </div>
