@@ -1,6 +1,7 @@
 <template>
     <div class="space-y-1">
-        <button @click="modalActive = true" class="flex items-center p-2 bg-main-color rounded-md text-sm">New User
+        <button @click="modalActive = true" class="flex items-center py-1
+         px-2 bg-main-color rounded-lg text-sm">New User
             <i class="material-icons ml-1">add</i>
         </button>
         <Loading v-if="userStore.getLoadingUser" />
@@ -12,7 +13,19 @@
             <Transition name="modal"> 
                 <modal-generic v-if="modalActive" 
                 @closeModal="modalActive = false" maxWidth="600" title="New User">
-                    ASASASASA
+                 <form class="space-y-5 p-10">
+                    <BaseInput 
+                    label="Title"
+                    v-model="event.title" 
+                    type="text"/>
+
+                    <BaseInput 
+                    label="Description"
+                    v-model="event.description" 
+                    type="password"/>
+
+                    <button @click.prevent="onSubmit">Send</button>
+                 </form>
                 </modal-generic>
             </Transition>
         </Teleport>
@@ -25,11 +38,21 @@ import ModalGeneric from '../components/tools/ModalGeneric.vue'
 import { reactive, ref, onMounted } from 'vue'
 import { useUserStore } from '../store/userStore.js'
 import Loading from '../components/tools/Loading.vue'
+import BaseInput from '../components/tools/BaseInput.vue';
 
 const userStore = useUserStore()
 
 const users = ref([])
 const modalActive = ref(false)
+
+const event = reactive({
+    title: '',
+    description: ''
+})
+
+const onSubmit = () => {
+    console.log(event)
+}
 
 onMounted(async () => {
     users.value = await userStore.fetchUsers()
