@@ -13,7 +13,7 @@
         class="absolute bg-gray-100 dark:bg-gray-700 right-0 h-screen"
       >
         <div
-          class="flex items-center bg-blue-300 dark:bg-blue-400 h-9 justify-between"
+          class="flex items-center bg-main-color h-9 justify-between"
         >
           <p class="ml-2 font-medium text-lg text-black">{{ title }}</p>
           <!-- <span

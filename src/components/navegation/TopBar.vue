@@ -11,13 +11,16 @@
     </div>
   </div>
 
-  <ModalUser v-if="modalUserActive" @closeModal="modalUserActive = false" 
-  :title="'User Settings'"/>
+  <modal-user v-if="modalUserActive" @closeModal="modalUserActive = false" 
+  :title="'User Settings'">
+    <UserProfile />
+  </modal-user>
 </template>
 
 <script setup>
 import DarkMode from '../DarkMode.vue'
 import ModalUser from '../tools/ModalUserProfile.vue'
+import UserProfile from '../../components/modalViews/UserProfile.vue'
 import { useAuthStore } from '../../store/authStore';
 import { ref } from 'vue'
 
