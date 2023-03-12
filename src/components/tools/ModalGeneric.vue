@@ -1,37 +1,18 @@
 <template>
-  <div
-    @click.self="clickOn"
-    class="fixed right-0 left-0 top-0 bottom-0 bg-opacity-60 bg-gray-300 z-40"
-  >
-    <transition
-      appear
-      :enter-active-class="'animated ' + animate"
-      leave-active-class="animated rotateOutDownLeft"
-    >
-      <div
-        :style="'width: ' + maxWidth + 'px'"
-        class="relative bg-gray-100 dark:bg-gray-700 mx-auto h-auto mt-20 rounded"
-      >
-        <div
-          class="flex items-center bg-blue-400 dark:bg-blue-500 h-9 justify-between rounded-t"
-        >
+  <div @click.self="clickOn" class="fixed right-0 left-0 top-0 bottom-0 bg-opacity-60 bg-gray-300 z-40">
+    <div :style="'width: ' + maxWidth + 'px'"
+        class="relative bg-gray-100 dark:bg-gray-700 mx-auto h-auto mt-20 rounded">
+          <div class="flex items-center bg-main-color h-9 justify-between rounded-t">
           <p class="ml-2 font-medium text-lg text-black">{{ title }}</p>
-          <span
-            @click="clickOn"
-            class="mr-1 px-3 py-1 cursor-pointer text-black
-             hover:bg-gray-400 hover:bg-opacity-30 rounded-full"
-          >
-            <font-awesome-icon
-              class="text-lg text-gray-900 dark:text-white"
-              icon="close"
-            />
-          </span>
+
+          <i @click="clickOn" class="material-icons px-3 py-1 cursor-pointer text-black
+               hover:bg-gray-400 hover:bg-opacity-30 rounded-full">close</i>
+
         </div>
         <div class="p-2">
           <slot></slot>
         </div>
       </div>
-    </transition>
   </div>
 </template>
 
@@ -69,3 +50,8 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+
+</style>
