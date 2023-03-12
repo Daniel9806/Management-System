@@ -32,13 +32,12 @@
                         </div>
                         <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Recordarme</label>
                     </div>
-                    <a href="#" class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Olvidaste la
+                    <a href="#" class="ml-auto text-sm text-main-color hover:underline">Olvidaste la
                         contraseña?</a>
                 </div>
                 <button @click.prevent="login" class="flex justify-center items-center space-x-2 w-full text-white
-                 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5
-                  py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700
-                   outline-none">
+                 bg-main-color font-medium rounded-lg text-sm px-5
+                  py-2.5 text-center outline-none">
                     <svg v-if="authStore.getLoadingAuth" role="status"
                         class="mt-[3px] w-4 h-4 text-gray-200 animate-spin dark:text-gray-900"
                         viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">

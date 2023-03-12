@@ -107,7 +107,7 @@ setCurrentTab();
 }
 
 .activeIcon {
-  @apply bg-emerald-400 py-2 px-3 text-3xl text-gray-100 rounded-t-xl rounded-bl-xl z-10 
+  @apply bg-main-color py-2 px-3 text-3xl text-gray-100 rounded-t-xl rounded-bl-xl z-10 
   transition-all duration-200 ease-linear absolute left-2
 }
 </style>
