@@ -1,6 +1,6 @@
 <template>
   <div class="w-44 fixed top-5 left-5 bottom-5 flex flex-col rounded-xl
-           bg-slate-800 dark:bg-black text-gray-300">
+           bg-slate-600 dark:bg-black text-gray-300">
     <div class="overflow-auto scrollbar-hide space-y-1.5">
 
       <div class="mb-8 flex flex-col items-center mt-3">

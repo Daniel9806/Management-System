@@ -1,17 +1,17 @@
 <script setup>
 import { useDark, useToggle } from '@vueuse/core'
+import { ref } from 'vue'
 
 const isDark = useDark()
+const checked = ref(false)
 const toggleDark = useToggle(isDark)
-
-// console.log(isDark.value)
 
 </script>
 
 <template>
-    <button @click="toggleDark()" class="py-1">Toggle</button>
+    <ToggleButton v-model="checked" @click="toggleDark()" 
+    onLabel="" offLabel="" onIcon="pi pi-moon" offIcon="pi pi-sun" />
  </template>
 
 <style scoped>
-
 </style>

@@ -2,7 +2,8 @@
     <div>
        <h1>Home: {{ counterStore.counter }}</h1>
        <h2>Number Of Changes: {{ counterStore.numberOfChanges }}</h2>
-       <button @click="counterStore.incrementBy(3)">+</button>
+       <Button class="myButton" 
+       @click="counterStore.incrementBy(3)" label="+" />
     </div>
 </template>
 
@@ -16,3 +17,9 @@ const increment = (value) => {
 }
 
 </script>
+
+<style scoped>
+.myButton {
+    @apply px-4 py-2
+}
+</style>
