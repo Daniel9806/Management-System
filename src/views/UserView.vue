@@ -30,8 +30,10 @@ import { reactive, ref, onMounted } from 'vue'
 import { useUserStore } from '../store/userStore.js'
 import Loading from '../components/tools/Loading.vue'
 import CreateUser from '../components/modalViews/CreateUser.vue'
+import { useAlert } from '../composables/useAlert'
 
 const userStore = useUserStore()
+const { timerToast } = useAlert()
 
 const users = ref([])
 const modalActive = ref(false)
@@ -55,6 +57,13 @@ const onEdit = (item) => {
 
 onMounted(async () => {
     users.value = await userStore.fetchUsers()
+    if(users.value.name == "AxiosError" ) {
+        timerToast.fire({
+            icon: 'error',
+            text: `${users.value.message}`  
+        })
+        users.value = []
+    }
 })
 
 </script>

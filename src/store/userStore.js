@@ -29,6 +29,7 @@ export const useUserStore = defineStore('userStore', {
             } catch (error) {
                 this.loadingFetching = false
                 console.log(error)
+                return error
             }
         },
 

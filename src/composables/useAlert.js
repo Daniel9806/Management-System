@@ -7,7 +7,8 @@ import Swal from "sweetalert2";
 //info
 //question
 
-const useAlert = () => {
+export const useAlert = () => {
+
   const timerToast = Swal.mixin({
     toast: true,
     icon: 'success',
@@ -54,4 +55,3 @@ const useAlert = () => {
   };
 };
 
-export default useAlert;
