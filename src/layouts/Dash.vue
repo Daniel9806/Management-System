@@ -2,7 +2,7 @@
   <div>
     <TopBar />
     <SideBar />
-    <RouterView class="p-4 ml-52 mt-16" />
+    <RouterView class="p-4 ml-52 mt-1" />
     <!-- absolute left-56 top-16 -->
   </div>
 </template>
