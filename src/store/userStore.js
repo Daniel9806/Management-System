@@ -4,28 +4,47 @@ import mainApi from '../api/mainApi'
 export const useUserStore = defineStore('userStore', {
 
     state: () => ({
-        loading: false
+        loadingFetching: false,
+        loadingCreating: false
     }),
 
     getters: {
-        getLoadingUser() {
-            return this.loading
-        }
+        getLoadingFetching() {
+            return this.loadingFetching
+        },
+
+        getLoadingCreating() {
+            return this.loadingCreating
+        },
     },
 
     actions: {
-       async fetchUsers() {
-        this.loading = true
-        try {
-            const { data } = await mainApi.get('/users')
-            const users = JSON.parse(data.data)
-            this.loading = false
-            return users
-        } catch (error) {
-            this.loading = false
-            console.log(error)
+        async fetchUsers() {
+            this.loadingFetching = true
+            try {
+                const { data } = await mainApi.get('/users')
+                const users = JSON.parse(data.data)
+                this.loadingFetching = false
+                return users
+            } catch (error) {
+                this.loadingFetching = false
+                console.log(error)
+            }
+        },
+
+        async createUser(user) {
+            this.loadingCreating = true
+            console.log(user)
+            try {
+                const { data } = await mainApi.post('/users', user)
+                const newUser = JSON.parse(data.data)
+                console.log(newUser)
+                this.loadingCreating = false
+            } catch (error) {
+                this.loadingCreating = false
+                console.log(error)
+            }
         }
-       }
     }
 
 })
