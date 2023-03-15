@@ -1,13 +1,14 @@
 <template>
-    <div class="space-y-1">
-        <div>
-            <button @click="modalActive = true" class="flex items-center py-1
-                             px-2 bg-main-color rounded-lg text-sm">New User
-                <i class="material-icons ml-1">add</i>
+    <div class="space-y-4 pr-6">
+        <div class="flex space-x-2">
+            <h1>Users</h1>
+            <button @click="modalActive = true" 
+            class="flex items-center px-4 bg-main-color rounded-sm">
+                <i class="material-icons">add</i>
             </button>
         </div>
 
-        <Loading v-if="userStore.getLoadingUser" />
+        <Loading v-if="userStore.getLoadingFetching" />
 
         <TableGeneric v-else :filteredList="users" :header="header" :fields="fields" :greenAction="'Edit'"
             :blueAction="'Details'" :redAction="'Delete'" @onGreenAction="onEdit($event)" />
@@ -15,13 +16,7 @@
         <Teleport to="#modal">
             <Transition name="modal">
                 <modal-generic v-if="modalActive" @closeModal="modalActive = false" maxWidth="600" title="New User">
-                    <form class="space-y-5 p-10">
-                        <BaseInput label="Title" v-model="event.title" type="text" />
-
-                        <BaseInput label="Description" v-model="event.description" type="password" />
-
-                        <button @click.prevent="onSubmit">Send</button>
-                    </form>
+                   <CreateUser />
                 </modal-generic>
             </Transition>
         </Teleport>
@@ -34,7 +29,7 @@ import ModalGeneric from '../components/tools/ModalGeneric.vue'
 import { reactive, ref, onMounted } from 'vue'
 import { useUserStore } from '../store/userStore.js'
 import Loading from '../components/tools/Loading.vue'
-import BaseInput from '../components/tools/BaseInput.vue';
+import CreateUser from '../components/modalViews/CreateUser.vue'
 
 const userStore = useUserStore()
 
@@ -46,16 +41,12 @@ const event = reactive({
     description: ''
 })
 
-const onSubmit = () => {
-    console.log(event)
-}
-
 const fields = [
-    'id', 'name', 'lastname', 'surname', 'confirmed'
+    'id', 'username', 'name', 'lastname', 'surname', 'confirmed'
 ]
 
 const header = [
-    'ID', 'Name', 'Last Name', 'Surname', 'Confirmed'
+    'ID', 'Username', 'Name', 'Last Name', 'Surname', 'Confirmed'
 ]
 
 const onEdit = (item) => {
