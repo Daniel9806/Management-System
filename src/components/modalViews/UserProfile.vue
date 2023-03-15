@@ -1,5 +1,5 @@
 <template>
-  <div class="text-gray-700 dark:text-gray-300 p-2">
+  <div v-if="AuthStore.getUserAuth" class="text-gray-700 dark:text-gray-300 p-2">
     <div class="flex items-center space-x-4 border-b border-gray-300 dark:border-gray-600 pb-3">
       <input
         ref="fileInput"

@@ -3,7 +3,11 @@
     <div class="flex items-center space-x-2 mr-4 cursor-pointer">
       <DarkMode />
       <img class="w-8 h-8 rounded-full" src="../../assets/vue.svg" alt="">
-      <p @click="modalUserActive = true" v-if="authStore.getUserAuth">{{ authStore.getUserAuth.username }}</p>
+      <p @click="modalUserActive = true" 
+      v-if="authStore.getUserAuth">{{ authStore.getUserAuth.username }}</p>
+      
+      <!-- Sin conexion -->
+      <p v-else @click="modalUserActive = true">Danielo</p>
     </div>
   </div>
 

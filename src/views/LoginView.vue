@@ -68,11 +68,15 @@ const user = reactive({
     password: 'a'
 })
 
-const login = async () => {
-    const resp = await authStore.login(user)
-    if(resp) {
-        router.push('/dash')
-    }
+// const login = async () => {
+//     const resp = await authStore.login(user)
+//     if(resp) {
+//         router.push('/dash')
+//     }
+// }
+
+const login = () => {
+    router.push('/dash')
 }
 
 </script>
