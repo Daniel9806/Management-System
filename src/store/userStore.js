@@ -7,6 +7,7 @@ const { timerToast } = useAlert()
 export const useUserStore = defineStore('userStore', {
 
     state: () => ({
+        users: [],
         loadingFetching: false,
         loadingCreating: false
     }),
@@ -19,6 +20,10 @@ export const useUserStore = defineStore('userStore', {
         getLoadingCreating() {
             return this.loadingCreating
         },
+
+        getUsers() {
+            return this.users
+        },
     },
 
     actions: {
@@ -27,8 +32,9 @@ export const useUserStore = defineStore('userStore', {
             try {
                 const { data } = await mainApi.get('/users')
                 const users = JSON.parse(data.data)
+                this.users = users
                 this.loadingFetching = false
-                return users
+                // return users
             } catch (error) {
                 this.loadingFetching = false
                 console.log(error)
