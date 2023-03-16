@@ -5,7 +5,7 @@ import router from './router'
 import './style.css'
 import './assets/animate.css'
 //Primevue imports
-import 'primevue/resources/themes/bootstrap4-dark-purple/theme.css';
+import 'primevue/resources/themes/arya-green/theme.css';
 import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';   
 import PrimeVue from 'primevue/config';
