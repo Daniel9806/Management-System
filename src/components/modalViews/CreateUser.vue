@@ -1,5 +1,5 @@
 <template>
-    <form class="space-y-5 px-24 py-10">
+    <form class="space-y-5 p-10">
         <BaseInput label="Username" v-model="user.username" type="text" />
         <BaseInput label="Name" v-model="user.name" type="text" />
         <BaseInput label="Surname" v-model="user.surname" type="text" />
