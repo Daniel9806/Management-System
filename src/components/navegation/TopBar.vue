@@ -7,7 +7,7 @@
       v-if="authStore.getUserAuth">{{ authStore.getUserAuth.username }}</p>
       
       <!-- Sin conexion -->
-      <p v-else @click="modalUserActive = true">Danielo</p>
+      <p v-else>Loading...</p>
     </div>
   </div>
 

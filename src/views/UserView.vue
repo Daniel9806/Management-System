@@ -17,7 +17,8 @@
         :blueAction="'Details'" 
         :redAction="'Delete'" 
         @onGreenAction="onEdit($event)"
-        @onBlueAction="onDetails($event)" />
+        @onBlueAction="onDetails($event)"
+        @onRedAction="onDelete($event)" />
 
         <Teleport to="#modal">
             <Transition name="modal">
@@ -49,8 +50,10 @@ import { useUserStore } from '../store/userStore.js'
 import Loading from '../components/tools/Loading.vue'
 import CreateUser from '../components/modalViews/CreateUser.vue'
 import UserDetails from '../components/modalViews/UserDetails.vue'
+import { useAlert } from '../composables/useAlert'
 
 const userStore = useUserStore()
+const {  } = useAlert()
 
 // const users = ref([])
 const modalCreateActive = ref(false)
@@ -72,6 +75,12 @@ const onEdit = (item) => {
 const onDetails = (item) => {
     modalDetailsActive.value = true
     itemSelected.value = item
+}
+
+const onDelete = async (item) => {
+    // loadingAlert.fire()
+    // await userStore.deleteUser(item)
+    // await userStore.fetchUsers()
 }
 
 const userCreated = async () => {

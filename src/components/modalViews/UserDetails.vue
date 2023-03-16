@@ -1,5 +1,5 @@
 <template>
-  <div class="text-gray-700 dark:text-gray-200 h-[400px] p-4">
+  <div class="text-gray-700 dark:text-gray-200 h-[300px] p-4">
     <!-- TOP -->
     <!-- <Loading
       v-if="!readyInfo"

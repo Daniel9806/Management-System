@@ -18,7 +18,7 @@ import { useAuthStore } from "../store/authStore";
 const authStore = useAuthStore()
 
 onMounted(() => {
-  //  authStore.refresh()
+   authStore.refresh()
 })
 
 </script>

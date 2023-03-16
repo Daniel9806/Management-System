@@ -1,5 +1,5 @@
 <template>
-  <div v-if="AuthStore.getUserAuth" class="text-gray-700 dark:text-gray-300 p-2">
+  <div v-if="authStore.getUserAuth" class="text-gray-700 dark:text-gray-300 p-2">
     <div class="flex items-center space-x-4 border-b border-gray-300 dark:border-gray-600 pb-3">
       <input
         ref="fileInput"
@@ -16,9 +16,9 @@
         <!-- <img v-else class="w-20 h-20 rounded-full" :src="getUserImage" alt="" /> -->
       </div>
       <div class="">
-        <p v-if="AuthStore.getUserAuth" class="font-semibold">
-          {{ AuthStore.getUserAuth.name }} {{ AuthStore.getUserAuth.surname }}
-          {{ AuthStore.getUserAuth.lastname }}
+        <p class="font-semibold">
+          {{ authStore.getUserAuth.name }} {{ authStore.getUserAuth.surname }}
+          {{ authStore.getUserAuth.lastname }}
         </p>
       </div>
     </div>
@@ -39,7 +39,7 @@
               Usuario:
             </p>
             <p class="text-gray-500 dark:text-gray-400 text-sm">
-              {{ AuthStore.getUserAuth.username }}
+              {{ authStore.getUserAuth.username }}
             </p>
           </div>
           <div class="flex items-center space-x-2">
@@ -47,7 +47,7 @@
               Nomber:
             </p>
             <p class="text-gray-500 dark:text-gray-400 text-sm">
-              {{ AuthStore.getUserAuth.name }}
+              {{ authStore.getUserAuth.name }}
             </p>
           </div>
           <div class="flex items-center space-x-2">
@@ -55,7 +55,7 @@
               Primer Apellido:
             </p>
             <p class="text-gray-500 dark:text-gray-400 text-sm">
-              {{ AuthStore.getUserAuth.surname }}
+              {{ authStore.getUserAuth.surname }}
             </p>
           </div>
           <div class="flex items-center space-x-2">
@@ -63,7 +63,7 @@
               Segundo Apellido:
             </p>
             <p class="text-gray-500 dark:text-gray-400 text-sm">
-              {{ AuthStore.getUserAuth.lastname }}
+              {{ authStore.getUserAuth.lastname }}
             </p>
           </div>
         </div>
@@ -79,7 +79,7 @@ import { useAuthStore } from "../../store/authStore";
 import { ref } from "vue";
 // import mainApi from "@/api/mainApi";
 
-const AuthStore = useAuthStore()
+const authStore = useAuthStore()
 
 const localImage = ref(null);
 const image = ref("");

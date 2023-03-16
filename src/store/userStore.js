@@ -75,6 +75,19 @@ export const useUserStore = defineStore('userStore', {
                     text: `${error.message}`
                 })
             }
+        },
+
+        async deleteUser(user) {
+            try {
+                const resp = await mainApi.delete(`/users/${user.id}`)
+                console.log(resp)
+            } catch (error) {
+                console.log(error)
+                timerToast.fire({
+                    icon: 'error',
+                    text: `${error.message}`
+                })
+            }
         }
     }
 

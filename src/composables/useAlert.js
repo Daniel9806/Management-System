@@ -45,13 +45,13 @@ export const useAlert = () => {
     showCancelButton: false,
     confirmButtonText: "OK",
   });
- 
-  
+
+
   return {
     timerToast,
     timerAlert,
     confirmAlert,
-    okAlert
+    okAlert,    
   };
 };
 
