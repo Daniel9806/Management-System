@@ -3,7 +3,7 @@
         <div class="flex space-x-2">
             <h1>Users</h1>
             <button @click="modalActive = true" 
-            class="flex items-center px-4 bg-main-color rounded-sm">
+            class="flex items-center px-4 bg-main-color rounded-t-lg rounded-bl-lg">
                 <i class="material-icons">add</i>
             </button>
         </div>
@@ -16,7 +16,7 @@
         <Teleport to="#modal">
             <Transition name="modal">
                 <modal-generic v-if="modalActive" @closeModal="modalActive = false" maxWidth="600" title="New User">
-                   <CreateUser />
+                   <CreateUser @user-created="userCreated()" />
                 </modal-generic>
             </Transition>
         </Teleport>
@@ -30,40 +30,33 @@ import { reactive, ref, onMounted } from 'vue'
 import { useUserStore } from '../store/userStore.js'
 import Loading from '../components/tools/Loading.vue'
 import CreateUser from '../components/modalViews/CreateUser.vue'
-import { useAlert } from '../composables/useAlert'
+// import { useAlert } from '../composables/useAlert'
 
 const userStore = useUserStore()
-const { timerToast } = useAlert()
+// const { timerToast } = useAlert()
 
 const users = ref([])
 const modalActive = ref(false)
 
-const event = reactive({
-    title: '',
-    description: ''
-})
-
 const fields = [
-    'id', 'username', 'name', 'lastname', 'surname', 'confirmed'
+    'username', 'name', 'lastname', 'surname', 'confirmed'
 ]
 
 const header = [
-    'ID', 'Username', 'Name', 'Last Name', 'Surname', 'Confirmed'
+    'Username', 'Name', 'Last Name', 'Surname', 'Confirmed'
 ]
 
 const onEdit = (item) => {
     console.log(item)
 }
 
+const userCreated = async () => {
+    users.value = await userStore.fetchUsers()
+    modalActive.value = false
+}
+
 onMounted(async () => {
     users.value = await userStore.fetchUsers()
-    if(users.value.name == "AxiosError" ) {
-        timerToast.fire({
-            icon: 'error',
-            text: `${users.value.message}`  
-        })
-        users.value = []
-    }
 })
 
 </script>
