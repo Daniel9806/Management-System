@@ -35,7 +35,7 @@
                     <a href="#" class="ml-auto text-sm text-main-color hover:underline">Olvidaste la
                         contraseña?</a>
                 </div>
-                <button @click.prevent="login" class="flex justify-center items-center space-x-2 w-full text-white
+                <!-- <button @click.prevent="login" class="flex justify-center items-center space-x-2 w-full text-white
                  bg-main-color font-medium rounded-lg text-sm px-5
                   py-2.5 text-center outline-none">
                     <svg v-if="authStore.getLoadingAuth" role="status"
@@ -49,7 +49,9 @@
                             fill="#1C64F2" />
                     </svg>
                     <p>Entrar</p>
-                </button>
+                </button> -->
+                <Button label="Login" @click.prevent="login" 
+                :loading="authStore.getLoadingAuth" />
             </form>
         </div>
     </div>
