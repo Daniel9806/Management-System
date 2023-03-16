@@ -2,6 +2,8 @@ import { defineStore } from 'pinia'
 import mainApi from '../api/mainApi'
 // import { useRouter } from 'vue-router'
 
+// const router = useRouter()
+
 export const useAuthStore = defineStore('authStore', {
 
     state: () => ({
@@ -47,6 +49,7 @@ export const useAuthStore = defineStore('authStore', {
                     await this.fetchUserAuth()
                     this.loading = false
                     return data
+                    // router.push('/dash')
                 }
 
             } catch (error) {
