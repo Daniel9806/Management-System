@@ -34,7 +34,7 @@
                 <modal-generic v-if="modalDetailsActive"
                  @closeModal="modalDetailsActive = false"
                  maxWidth="600" title="User Details">
-                   <div>{{ details }}</div>
+                   <UserDetails :item="itemSelected" />
                 </modal-generic>
             </Transition>
         </Teleport>
@@ -48,15 +48,14 @@ import { reactive, ref, onMounted } from 'vue'
 import { useUserStore } from '../store/userStore.js'
 import Loading from '../components/tools/Loading.vue'
 import CreateUser from '../components/modalViews/CreateUser.vue'
-// import { useAlert } from '../composables/useAlert'
+import UserDetails from '../components/modalViews/UserDetails.vue'
 
 const userStore = useUserStore()
-// const { timerToast } = useAlert()
 
 // const users = ref([])
 const modalCreateActive = ref(false)
 const modalDetailsActive = ref(false)
-const details = ref({})
+const itemSelected = ref({})
 
 const fields = [
     'username', 'name', 'lastname', 'surname', 'confirmed'
@@ -71,9 +70,8 @@ const onEdit = (item) => {
 }
 
 const onDetails = (item) => {
-    console.log(item)
     modalDetailsActive.value = true
-    details.value = item
+    itemSelected.value = item
 }
 
 const userCreated = async () => {
