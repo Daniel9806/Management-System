@@ -2,21 +2,39 @@
     <div class="space-y-4 pr-6">
         <div class="flex space-x-2">
             <h1>Users</h1>
-            <button @click="modalActive = true" 
-            class="flex items-center px-4 bg-main-color rounded-t-lg rounded-bl-lg">
+            <button @click="modalCreateActive = true" class="flex items-center px-4 bg-main-color rounded-t-lg rounded-bl-lg">
                 <i class="material-icons">add</i>
             </button>
         </div>
 
         <Loading v-if="userStore.getLoadingFetching" />
 
-        <TableGeneric v-else :filteredList="users" :header="header" :fields="fields" :greenAction="'Edit'"
-            :blueAction="'Details'" :redAction="'Delete'" @onGreenAction="onEdit($event)" />
+        <TableGeneric v-else 
+        :filteredList="userStore.getUsers" 
+        :header="header" 
+        :fields="fields" 
+        :greenAction="'Edit'"
+        :blueAction="'Details'" 
+        :redAction="'Delete'" 
+        @onGreenAction="onEdit($event)"
+        @onBlueAction="onDetails($event)" />
 
         <Teleport to="#modal">
             <Transition name="modal">
-                <modal-generic v-if="modalActive" @closeModal="modalActive = false" maxWidth="600" title="New User">
-                   <CreateUser @user-created="userCreated()" />
+                <modal-generic v-if="modalCreateActive"
+                 @closeModal="modalCreateActive = false"
+                 maxWidth="400" title="New User">
+                    <CreateUser @user-created="userCreated()" />
+                </modal-generic>
+            </Transition>
+        </Teleport>
+
+        <Teleport to="#modal">
+            <Transition name="modal">
+                <modal-generic v-if="modalDetailsActive"
+                 @closeModal="modalDetailsActive = false"
+                 maxWidth="600" title="User Details">
+                   <div>{{ details }}</div>
                 </modal-generic>
             </Transition>
         </Teleport>
@@ -35,8 +53,10 @@ import CreateUser from '../components/modalViews/CreateUser.vue'
 const userStore = useUserStore()
 // const { timerToast } = useAlert()
 
-const users = ref([])
-const modalActive = ref(false)
+// const users = ref([])
+const modalCreateActive = ref(false)
+const modalDetailsActive = ref(false)
+const details = ref({})
 
 const fields = [
     'username', 'name', 'lastname', 'surname', 'confirmed'
@@ -50,13 +70,22 @@ const onEdit = (item) => {
     console.log(item)
 }
 
+const onDetails = (item) => {
+    console.log(item)
+    modalDetailsActive.value = true
+    details.value = item
+}
+
 const userCreated = async () => {
-    users.value = await userStore.fetchUsers()
-    modalActive.value = false
+    await userStore.fetchUsers()
+    modalCreateActive.value = false
 }
 
 onMounted(async () => {
-    users.value = await userStore.fetchUsers()
+    if (userStore.getUsers.length == 0) {
+        await userStore.fetchUsers()
+    }
+
 })
 
 </script>
