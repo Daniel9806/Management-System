@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia'
 import mainApi from '../api/mainApi'
+import { useAlert } from '../composables/useAlert'
 // import { useRouter } from 'vue-router'
 
 // const router = useRouter()
+const { timerToast } = useAlert()
 
 export const useAuthStore = defineStore('authStore', {
 
@@ -48,6 +50,10 @@ export const useAuthStore = defineStore('authStore', {
                     localStorage.setItem('token', data.message)
                     await this.fetchUserAuth()
                     this.loading = false
+                    timerToast.fire({
+                        icon: 'success',
+                        text: 'Logged'
+                    })
                     return data
                     // router.push('/dash')
                 }
@@ -55,6 +61,10 @@ export const useAuthStore = defineStore('authStore', {
             } catch (error) {
                 this.loading = false
                 console.log(error)
+                timerToast.fire({
+                    icon: 'error',
+                    text: `${error.message}`
+                })
             }
         },
 
@@ -73,8 +83,10 @@ export const useAuthStore = defineStore('authStore', {
         logout() {
             if (localStorage.getItem('token')) {
                 localStorage.removeItem('token')
-                return
-                // window.location.href = '/'
+                timerToast.fire({
+                    icon: 'success',
+                    text: 'Logged out'
+                })
             }
         },
     },
