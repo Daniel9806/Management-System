@@ -2,40 +2,42 @@
     <div class="space-y-4 pr-6">
         <div class="flex space-x-2">
             <h1>Users</h1>
-            <button @click="modalCreateActive = true" class="flex items-center px-4 bg-main-color rounded-t-lg rounded-bl-lg">
+            <button @click="modalCreateActive = true"
+                class="flex items-center px-4 bg-main-color rounded-t-lg rounded-bl-lg">
                 <i class="material-icons">add</i>
             </button>
         </div>
 
         <Loading v-if="userStore.getLoadingFetching" />
 
-        <TableGeneric v-else 
-        :filteredList="userStore.getUsers" 
-        :header="header" 
-        :fields="fields" 
-        :greenAction="'Edit'"
-        :blueAction="'Details'" 
-        :redAction="'Delete'" 
-        @onGreenAction="onEdit($event)"
-        @onBlueAction="onDetails($event)"
-        @onRedAction="onDelete($event)" />
+        <TableGeneric v-else :filteredList="userStore.getUsers" :header="header" :fields="fields" :greenAction="'Edit'"
+            :blueAction="'Details'" :redAction="'Delete'" @onGreenAction="onEdit($event)" @onBlueAction="onDetails($event)"
+            @onRedAction="onDelete($event)" />
 
         <Teleport to="#modal">
             <Transition name="modal">
-                <modal-generic v-if="modalCreateActive"
-                 @closeModal="modalCreateActive = false"
-                 maxWidth="400" title="New User">
-                    <CreateUser @user-created="userCreated()" />
+                <modal-generic v-if="modalCreateActive" @closeModal="modalCreateActive = false" maxWidth="400"
+                    title="New User">
+                    <UserCreate @user-created="userCreated()" />
                 </modal-generic>
             </Transition>
         </Teleport>
 
         <Teleport to="#modal">
             <Transition name="modal">
-                <modal-generic v-if="modalDetailsActive"
-                 @closeModal="modalDetailsActive = false"
-                 maxWidth="600" title="User Details">
-                   <UserDetails :item="itemSelected" />
+                <modal-generic v-if="modalEditActive" 
+                @closeModal="modalEditActive = false" maxWidth="400"
+                    title="Edit User">
+                  <UserEdit :item-selected="itemSelected"/>
+                </modal-generic>
+            </Transition>
+        </Teleport>
+
+        <Teleport to="#modal">
+            <Transition name="modal">
+                <modal-generic v-if="modalDetailsActive" @closeModal="modalDetailsActive = false" maxWidth="600"
+                    title="User Details">
+                    <UserDetails :item="itemSelected" />
                 </modal-generic>
             </Transition>
         </Teleport>
@@ -48,16 +50,18 @@ import ModalGeneric from '../components/tools/ModalGeneric.vue'
 import { reactive, ref, onMounted } from 'vue'
 import { useUserStore } from '../store/userStore.js'
 import Loading from '../components/tools/Loading.vue'
-import CreateUser from '../components/modalViews/CreateUser.vue'
+import UserCreate from '../components/modalViews/UserCreate.vue'
 import UserDetails from '../components/modalViews/UserDetails.vue'
+import UserEdit from '../components/modalViews/UserEdit.vue'
 import { useAlert } from '../composables/useAlert'
 
 const userStore = useUserStore()
-const {  } = useAlert()
+const { confirmAlert, timerToast } = useAlert()
 
 // const users = ref([])
 const modalCreateActive = ref(false)
 const modalDetailsActive = ref(false)
+const modalEditActive = ref(false)
 const itemSelected = ref({})
 
 const fields = [
@@ -69,7 +73,8 @@ const header = [
 ]
 
 const onEdit = (item) => {
-    console.log(item)
+    modalEditActive.value = true
+    itemSelected.value = item
 }
 
 const onDetails = (item) => {
@@ -78,9 +83,16 @@ const onDetails = (item) => {
 }
 
 const onDelete = async (item) => {
-    // loadingAlert.fire()
-    // await userStore.deleteUser(item)
-    // await userStore.fetchUsers()
+    confirmAlert.fire({
+        icon: "question",
+        text: "Desea eliminar el usuario?",
+    })
+        .then(async (result) => {
+            if (result.isConfirmed) {
+                await userStore.deleteUser(item)
+                await userStore.fetchUsers()
+            }
+        });
 }
 
 const userCreated = async () => {
