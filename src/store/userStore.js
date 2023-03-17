@@ -9,7 +9,8 @@ export const useUserStore = defineStore('userStore', {
     state: () => ({
         users: [],
         loadingFetching: false,
-        loadingCreating: false
+        loadingCreating: false,
+        loadingDeleting: false
     }),
 
     getters: {
@@ -19,6 +20,10 @@ export const useUserStore = defineStore('userStore', {
 
         getLoadingCreating() {
             return this.loadingCreating
+        },
+
+        getLoadingDeleting() {
+            return this.loadingDeleting
         },
 
         getUsers() {
@@ -79,8 +84,13 @@ export const useUserStore = defineStore('userStore', {
 
         async deleteUser(user) {
             try {
-                const resp = await mainApi.delete(`/users/${user.id}`)
-                console.log(resp)
+                this.loadingDeleting = true
+                await mainApi.delete(`/users/${user.id}`)
+                this.loadingDeleting = false
+                timerToast.fire({
+                    icon: 'success',
+                    text: 'Usuario eliminado con éxito!'
+                })
             } catch (error) {
                 console.log(error)
                 timerToast.fire({
