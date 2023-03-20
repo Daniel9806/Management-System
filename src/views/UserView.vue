@@ -28,7 +28,7 @@
                 <modal-generic v-if="modalEditActive" 
                 @closeModal="modalEditActive = false" maxWidth="400"
                     title="Edit User">
-                  <UserEdit :item-selected="itemSelected"/>
+                  <UserEdit :item-selected="itemSelected" @user-edited="refreshUsers()"/>
                 </modal-generic>
             </Transition>
         </Teleport>
@@ -95,8 +95,12 @@ const onDelete = async (item) => {
         });
 }
 
-const userCreated = async () => {
+const refreshUsers = async () => {
     await userStore.fetchUsers()
+}
+
+const userCreated = async () => {
+    await refreshUsers()
     modalCreateActive.value = false
 }
 

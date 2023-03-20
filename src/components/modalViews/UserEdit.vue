@@ -5,7 +5,8 @@
         <BaseInput label="Surname" v-model="user.surname" type="text" />
         <BaseInput label="Lastname" v-model="user.lastname" type="text" />
 
-        <Button @click.prevent="onEdit" label="Edit" />
+        <Button @click.prevent="onEdit" :loading="userStore.getLoadingEditing" 
+        label="Edit" />
     </form>
 </template>
 
@@ -23,6 +24,7 @@ const props = defineProps({
 })
 
 const user = ref({
+    id: props.itemSelected.id,
     username: props.itemSelected.username,
     name: props.itemSelected.name,
     surname: props.itemSelected.surname,
@@ -30,7 +32,8 @@ const user = ref({
 })
 
 const onEdit = async () => {
-    console.log(user.value)
+    await userStore.editUser(user.value)
+    emit('userEdited')
 }
 
 </script>

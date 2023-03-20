@@ -12,7 +12,7 @@
 
 <script setup>
 import BaseInput from '../tools/BaseInput.vue'
-import { ref, defineEmits } from 'vue'
+import { ref } from 'vue'
 import { useUserStore } from '../../store/userStore'
 
 const userStore = useUserStore()

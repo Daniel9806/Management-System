@@ -10,7 +10,8 @@ export const useUserStore = defineStore('userStore', {
         users: [],
         loadingFetching: false,
         loadingCreating: false,
-        loadingDeleting: false
+        loadingDeleting: false,
+        loadingEditing: false
     }),
 
     getters: {
@@ -24,6 +25,10 @@ export const useUserStore = defineStore('userStore', {
 
         getLoadingDeleting() {
             return this.loadingDeleting
+        },
+
+        getLoadingEditing() {
+            return this.loadingEditing
         },
 
         getUsers() {
@@ -74,6 +79,38 @@ export const useUserStore = defineStore('userStore', {
                 }
             } catch (error) {
                 this.loadingCreating = false
+                console.log(error)
+                timerToast.fire({
+                    icon: 'error',
+                    text: `${error.message}`
+                })
+            }
+        },
+
+        async editUser(user) {
+            this.loadingEditing = true
+            try {
+                const { data } = await mainApi.put(`/users/${user.id}`, user)
+                console.log(data)
+                if (data.message == "validation.unique") {
+                    console.log('error de validacion')
+                    this.loadingCreating = false
+                    timerToast.fire({
+                        icon: 'error',
+                        text: `${data.message}`
+                    })
+                } else {
+                    const newUser = JSON.parse(data.data)
+                    console.log(newUser)
+                    this.loadingEditing = false
+                    timerToast.fire({
+                        icon: 'success',
+                        text: 'Usuario actualizado!'
+                    })
+                    return newUser
+                }
+            } catch (error) {
+                this.loadingEditing = false
                 console.log(error)
                 timerToast.fire({
                     icon: 'error',
