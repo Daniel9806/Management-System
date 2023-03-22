@@ -8,7 +8,7 @@
             </button>
         </div>
 
-        <Loading v-if="userStore.getLoadingFetching" />
+        <LoadingSpinner class="mx-auto translate-y-20" v-if="userStore.getLoadingFetching" />
 
         <TableGeneric v-else :filteredList="userStore.getUsers" :header="header" :fields="fields" :greenAction="'Edit'"
             :blueAction="'Details'" :redAction="'Delete'" @onGreenAction="onEdit($event)" @onBlueAction="onDetails($event)"
@@ -49,7 +49,7 @@ import TableGeneric from '../components/tools/TableGeneric.vue'
 import ModalGeneric from '../components/tools/ModalGeneric.vue'
 import { reactive, ref, onMounted } from 'vue'
 import { useUserStore } from '../store/userStore.js'
-import Loading from '../components/tools/Loading.vue'
+import LoadingSpinner from '../components/tools/LoadingSpinner.vue'
 import UserCreate from '../components/modalViews/UserCreate.vue'
 import UserDetails from '../components/modalViews/UserDetails.vue'
 import UserEdit from '../components/modalViews/UserEdit.vue'

@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <div class="p-4 mx-auto mt-28 max-w-sm bg-gray-300 rounded-lg border
-           border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
+                               border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
             <form class="space-y-6">
                 <h5 class="text-xl font-medium text-gray-900 dark:text-white">
                     Inicio de Sesión
@@ -50,8 +50,7 @@
                     </svg>
                     <p>Entrar</p>
                 </button> -->
-                <Button label="Login" @click.prevent="login" 
-                :loading="authStore.getLoadingAuth" />
+                <Button label="Login" @click.prevent="login" :loading="authStore.getLoadingAuth" />
             </form>
         </div>
     </div>
@@ -72,7 +71,7 @@ const user = reactive({
 
 const login = async () => {
     const resp = await authStore.login(user)
-    if(resp) {
+    if (resp) {
         router.push('/dash')
     }
 }
